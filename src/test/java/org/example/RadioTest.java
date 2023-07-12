@@ -75,12 +75,22 @@ public class RadioTest {
 
         rad.setCurrentNumberStation(10);
 
+        int expected = 10;
+        int actual = rad.getCurrentNumberStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    public void notShouldSet11NumStation() {
+        Radio rad = new Radio();
+
+        rad.setCurrentNumberStation(11);
+
         int expected = 0;
         int actual = rad.getCurrentNumberStation();
 
         Assertions.assertEquals(expected, actual);
     }
-
 
     // "next" Проверяем граничными значениями 0,1,8,9 и серединным значением 5
     @Test
@@ -419,6 +429,51 @@ public class RadioTest {
         rad.quiet();
         int expected = 99;
         int actual = rad.getCurrentVolume();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test // Тестирование конструктора с параметром (тестирование осуществляется с граничными значениями макс.колл-во станций-1, макс.колл-во станций+1,включая классы эквивалентности
+    public void shouldSetLessMaxNumberStation() {
+        Radio rad = new Radio(25);
+
+        rad.setCurrentNumberStation(24);
+
+        int expected = 24;
+        int actual = rad.getCurrentNumberStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    public void notShouldSetMoreMaxNumberStation() {
+        Radio rad = new Radio(25);
+
+        rad.setCurrentNumberStation(26);
+
+        int expected = 0;
+        int actual = rad.getCurrentNumberStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    public void notShouldSetNegativeNumStation2() {
+        Radio rad = new Radio(25);
+
+        rad.setCurrentNumberStation(-1);
+
+        int expected = 0;
+        int actual = rad.getCurrentNumberStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    public void ShouldSetZeroNumStationMax25() {
+        Radio rad = new Radio(25);
+
+        rad.setCurrentNumberStation(0);
+
+        int expected = 0;
+        int actual = rad.getCurrentNumberStation();
 
         Assertions.assertEquals(expected, actual);
     }

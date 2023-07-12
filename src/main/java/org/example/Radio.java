@@ -2,9 +2,20 @@ package org.example;
 
 public class Radio {
 
-    private int currentNumberStation; // ч.1_Работа с радиостанциями
+    private int currentNumberStation;
+    private int currentVolume;
+    private int maxNumberStation;
+
+    public Radio() {
+        this.maxNumberStation = 10;
+    }
+
+    public Radio(int countNumberStation) {
+        this.maxNumberStation = countNumberStation - 1;
+    }
 
     public int getCurrentNumberStation() {
+
         return currentNumberStation;
     }
 
@@ -12,14 +23,14 @@ public class Radio {
         if (currentNumberStation < 0) {
             return;
         }
-        if (currentNumberStation > 9) {
+        if (currentNumberStation > maxNumberStation) {
             return;
         }
         this.currentNumberStation = currentNumberStation;
     }
 
     public void next() {
-        if (currentNumberStation < 9) {
+        if (currentNumberStation < maxNumberStation) {
             currentNumberStation = currentNumberStation + 1;
         } else {
             currentNumberStation = 0;
@@ -30,11 +41,11 @@ public class Radio {
         if (currentNumberStation > 0) {
             currentNumberStation = currentNumberStation - 1;
         } else {
-            currentNumberStation = 9;
+            currentNumberStation = maxNumberStation;
         }
     }
 
-    private int currentVolume; // ч.2_Работа с громкостью
+
 
     public int getCurrentVolume() {
         return currentVolume;
